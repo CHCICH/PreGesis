@@ -4,9 +4,13 @@
   "description": "api",
   "main": "index.js",
   "scripts": {
-    "start" : "node api/server/main.js",
+    "start": "node server/main.js",
+    "dev" : "nodemon server/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "CHICH",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "nodemon": "^3.1.9"
+  }
 }
