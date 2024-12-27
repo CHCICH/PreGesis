@@ -1,10 +1,7 @@
 const express = require("express");
 const PageRouter = express.Router();
+const {MainPageFunction} = require("../controller/Page")
 
-
-PageRouter.get('/',(req,res)=>{
-    console.log(JSON.stringify(req.body));
-    res.status(200).json({name:"name"});
-})
+PageRouter.get('/',MainPageFunction);
 
 module.exports = PageRouter;

@@ -6,7 +6,7 @@ const {PageRouter} = require('../routes/MainRoutes');
 
 app.use(express.json());
 app.use(cors()); 
-app.use('/alouch',PageRouter); 
+app.use('/',PageRouter); 
 
 app.listen(SERVER_PORT,async ()=>{
     try{
