@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/main.js",
-    "dev" : "nodemon server/main.js",
+    "dev": "nodemon server/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "CHICH",
   "license": "MIT",
   "dependencies": {
+    "cors": "^2.8.5",
     "nodemon": "^3.1.9"
   }
 }
