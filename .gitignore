@@ -1,1 +1,25 @@
 /logs
+# Logs
+frontend/PregesisFrontEnd/logs
+frontend/PregesisFrontEnd/*.log
+frontend/PregesisFrontEnd/npm-debug.log*
+frontend/PregesisFrontEnd/yarn-debug.log*
+frontend/PregesisFrontEnd/yarn-error.log*
+frontend/PregesisFrontEnd/pnpm-debug.log*
+frontend/PregesisFrontEnd/lerna-debug.log*
+
+frontend/PregesisFrontEnd/node_modules
+frontend/PregesisFrontEnd/dist
+frontend/PregesisFrontEnd/dist-ssr
+frontend/PregesisFrontEnd/*.local
+
+# Editor directories and files
+frontend/PregesisFrontEnd/.vscode/*
+!frontend/PregesisFrontEnd/.vscode/extensions.json
+frontend/PregesisFrontEnd/.idea
+frontend/PregesisFrontEnd/.DS_Store
+frontend/PregesisFrontEnd/*.suo
+frontend/PregesisFrontEnd/*.ntvs*
+frontend/PregesisFrontEnd/*.njsproj
+frontend/PregesisFrontEnd/*.sln
+frontend/PregesisFrontEnd/*.sw?

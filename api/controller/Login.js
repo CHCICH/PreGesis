@@ -1,6 +1,6 @@
 const {Response,Error,EStacker} = require('../errors/MainError');
 const valdator = require('email-validator');
-const {searchUsername} = require('../DB/conectivity');
+const {searchUsernamerr} = require('../DB/conectivity');
 const {logging} = require('../utils/Logging');
  
 const Login = async (req,res) =>{
