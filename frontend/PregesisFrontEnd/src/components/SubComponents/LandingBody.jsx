@@ -1,6 +1,7 @@
 import React from 'react'
 import TitleBody from './TitleBody'
 import About from './About'
+import MeetTheTeam from './MeetTheTeam'
 
 const LandingBody = ({mode}) => {
   return (
@@ -8,6 +9,8 @@ const LandingBody = ({mode}) => {
       <TitleBody></TitleBody>
       <div className="speration_line_landing_page"></div>
       <About></About>
+      <div className="speration_line_landing_page"></div>
+      <MeetTheTeam></MeetTheTeam>
       <div className="speration_line_landing_page"></div>
 
     </div>
