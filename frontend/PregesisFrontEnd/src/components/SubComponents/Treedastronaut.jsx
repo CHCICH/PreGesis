@@ -104,7 +104,7 @@ const TreedAstronaut = () => {
                     left: 0,
                     width: '100%',
                     height: '100%',
-                    opacity: 0.3,
+                    opacity: 0.,
                     background: 'grey',
                     zIndex: 1,
                 }}
@@ -112,22 +112,22 @@ const TreedAstronaut = () => {
             {/* Canvas with overlay stacking below the overlay */}
             <div style={{ width: '100%', height: '100%', position: 'relative', zIndex: 0 }}>
                 <Canvas style={{ background: 'transparent', width: '100%', height: '100%' }} camera={{ position: cameraPosition }}>
-                    <ambientLight intensity={1.2} />
+                    <ambientLight intensity={2} />
                     <pointLight position={[0, 10, 10]} intensity={6} color="#fffbe6" castShadow />
                     <spotLight
                         position={[15, 20, 5]}
                         angle={0.4}
                         penumbra={1}
-                        intensity={12}
-                        color="#ffd580"
+                        intensity={120}
+                        color="red"
                         castShadow
                         shadow-mapSize-width={2048}
                         shadow-mapSize-height={2048}
                     />
                     <directionalLight
                         position={[-10, 15, 10]}
-                        intensity={6}
-                        color="#aeefff"
+                        intensity={10}
+                        color=""
                         castShadow
                         shadow-mapSize-width={2048}
                         shadow-mapSize-height={2048}
