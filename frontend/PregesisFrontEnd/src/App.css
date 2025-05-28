@@ -6,6 +6,7 @@ body {
     font-family: 'Inter', sans-serif;
     width: 100vs;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 #root {
@@ -15,10 +16,11 @@ body {
     flex-direction: column;
     height: 100%;
     align-items: center;
-    height: 1000vh;
+    height: 500vh;
 }
 
 .header {
+    animation: hedaerfadeIn 1s ease;
     background-color: rgb(247, 247, 247);
     width: 100%;
     height: 12vh;
@@ -35,7 +37,10 @@ body {
     left: 0;
     z-index: 1000;
 }
-
+@keyframes hedaerfadeIn {
+    from { transform: translateY(100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
 button:hover,
 .black_button:hover,
 .white_button:hover,
@@ -47,9 +52,25 @@ button:hover,
 }
 
 .footer {
-    background-color: green;
-    width: 100%;
-    margin: 0 auto;
+    width: 100vw;
+    min-height: 20vh;
+    background: #fff;
+    color: #2C2C2C;
+    display: flex;
+    box-shadow: 0 -4px 24px rgba(44,44,44,0.08);
+    height: 35vh;
+    padding: 10px;
+    animation: footerFadeIn 1s ease;
+    z-index: 1;
+    margin-top: auto;
+    border-top: 2px solid #e0e0e0;
+    border-left: 1px solid #e0e0e0;
+    border-right: 1px solid #e0e0e0;
+}
+
+@keyframes footerFadeIn {
+    from { transform: translateY(100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }
 
 .Landing_body {
