@@ -11,10 +11,11 @@ body {
 #root {
     width: 100%;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     flex-direction: column;
     height: 100%;
     align-items: center;
+    height: 1000vh;
 }
 
 .header {
@@ -29,6 +30,10 @@ body {
     box-sizing: border-box;
     align-items: center;
     /* margin: 0 auto; Center the header */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
 button:hover,
@@ -51,6 +56,7 @@ button:hover,
     background-color: rgb(255, 255, 255);
     width: 100%;
     margin: 0 auto;
+    margin-top:12vh ;
 }
 
 .Logo_title {
@@ -103,4 +109,16 @@ button:hover,
 .register_button{
     width: 70px;
     height: 30px;
+}
+
+.main_title_landing_page{
+    font-size: xxx-large;
+    font-weight: 100;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+.main_page_subheader{
+    margin-left: 2vw;
+    margin: 2vmax;
 }
