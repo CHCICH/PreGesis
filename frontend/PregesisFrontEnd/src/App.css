@@ -91,10 +91,12 @@ button:hover,
     border-radius: 10px;
     margin-right: 10px; 
     transition: all 1s ease-in-out;
+    cursor: pointer;
+    z-index: 3;
     
 }
 .white_button:hover{
-    background-color: rgb(230, 230, 230)
+    background-color: rgb(201, 200, 200)
 
 }
 .Sign_in_register_buttons{
@@ -121,4 +123,38 @@ button:hover,
 .main_page_subheader{
     margin-left: 2vw;
     margin: 2vmax;
+}
+
+.speration_line_landing_page{
+    transition: all 1s ease-in-out;
+    width: 95vw;
+    height: 0.5vh;
+    background-color: #2C2C2C;
+    margin: auto;
+    border-radius: 10px;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+}
+
+.About_landing_page{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.top_about_landing_page{
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8vh;
+}
+.image_about_landing{
+    width: 30vw;
+    margin-right: 8vw;
+}
+.image_about_landing_2{
+    width: 30vw;
+    margin-left: 8vw ;
+}
+.animate_arrow_landing{
+    margin-left: 2vw;
 }

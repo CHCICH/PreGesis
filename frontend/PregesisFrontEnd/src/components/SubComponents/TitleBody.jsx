@@ -9,6 +9,7 @@ const TitleBody = () => {
             <p style={{"color":"grey", "fontSize":"large", "marginLeft":"0.5vw","marginTop":"5vh"}}>Welcome to Pregesis – AI-Driven Exam Practice, Reimagined</p>
         </div>
         <TreedAstronaut></TreedAstronaut>
+        
 
     </div>
   )

@@ -93,10 +93,12 @@ const TreedAstronaut = () => {
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 position: 'relative', // Make this the stacking context
-                overflow: 'hidden'
+                overflow: 'hidden',
+                marginTop:"8vh",
+                marginBottom : "8vh"
             }}
         >
-            {/* Overlay div positioned absolutely within the parent */}
+            
             <div
                 style={{
                     position: 'absolute',
@@ -104,14 +106,33 @@ const TreedAstronaut = () => {
                     left: 0,
                     width: '100%',
                     height: '100%',
-                    opacity: 0.,
+                    opacity: 0,
                     background: 'grey',
                     zIndex: 1,
                 }}
-            />
+            ></div>
+            <button
+                className='white_button'
+                style={{
+                    fontSize: '25px',
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    width: '20%',
+                    height: '8%',
+                    opacity: 1,
+                    zIndex: 1,
+                    transform: 'translate(-50%, -50%)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
+                Join the community
+            </button>
             {/* Canvas with overlay stacking below the overlay */}
             <div style={{ width: '100%', height: '100%', position: 'relative', zIndex: 0 }}>
-                <Canvas style={{ background: 'transparent', width: '100%', height: '100%' }} camera={{ position: cameraPosition }}>
+                <Canvas style={{ background: 'transparent', width: '100%', height: '100%'}} camera={{ position: cameraPosition }}>
                     <ambientLight intensity={2} />
                     <pointLight position={[0, 10, 10]} intensity={6} color="#fffbe6" castShadow />
                     <spotLight
