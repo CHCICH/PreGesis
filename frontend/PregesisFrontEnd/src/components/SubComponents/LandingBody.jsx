@@ -2,6 +2,7 @@ import React from 'react'
 import TitleBody from './TitleBody'
 import About from './About'
 import MeetTheTeam from './MeetTheTeam'
+import WhyPregesis from './WhyPregesis'
 
 const LandingBody = ({mode}) => {
   return (
@@ -12,7 +13,7 @@ const LandingBody = ({mode}) => {
       <div className="speration_line_landing_page"></div>
       <MeetTheTeam></MeetTheTeam>
       <div className="speration_line_landing_page"></div>
-
+      <WhyPregesis></WhyPregesis>
     </div>
   )
 }

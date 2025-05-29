@@ -16,7 +16,6 @@ body {
     flex-direction: column;
     height: 100%;
     align-items: center;
-    height: 900vh;
 }
 
 .header {
@@ -62,9 +61,10 @@ button:hover,
     padding: 10px;
     animation: footerFadeIn 1s ease;
     z-index: 1;
-    margin-top: auto;
+    margin-top: 15vh;
     border-top: 2px solid #e0e0e0;
     border-left: 1px solid #e0e0e0;
+
     border-right: 1px solid #e0e0e0;
 }
 
@@ -178,4 +178,23 @@ button:hover,
 }
 .animate_arrow_landing{
     margin-left: 2vw;
+}
+
+.final_landing_page_paragraph{
+    width: 70vw;
+    font-size:x-large;
+    color:#5a5959;
+    line-height: 2
+}
+.final_landing_page_paragraph_div{
+    margin-top: 15vh;
+    width: 85vw;
+    display: flex;
+    justify-content: center;
+}
+.image_about_landing_3{
+    width: 85vw;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
