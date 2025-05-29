@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react'
 
 
-const About = ({color_mode}) => {
+const About = ({color_mode,screenSize}) => {
     let [arrowClasses_1, setArrowClasses_1] = useState(''); 
     let [arrowClasses_2, setArrowClasses_2] = useState(''); 
     let [style_mode,set_color_mode] = useState({mode1:{},mode2:{},mode3:{}});
@@ -44,9 +44,10 @@ const About = ({color_mode}) => {
                             setArrowClasses_1('animate_arrow_landing');
                         }
                     }}  className={style_mode.mode2.color} style={{
-                        width:"10vw",
+                        width:`${screenSize > 900 ? "10vw":"35vw" }`,
                         height:"5vh",
-                        fontSize:"large"
+                        fontSize:"large",
+                        
                     }}>Database</button>
                     <img src="/Icon.png" style={style_mode.mode3} className={arrowClasses_1}></img>
                     </div>
@@ -84,7 +85,7 @@ const About = ({color_mode}) => {
                         }
                     }}  className={style_mode.mode2.color}style={{
                         
-                        width:"15vw",
+                        width:`${screenSize > 900 ? "15vw":"45vw" }`,
                         height:"5vh",
                         fontSize:"large"
                     }}>Real Time Session</button>

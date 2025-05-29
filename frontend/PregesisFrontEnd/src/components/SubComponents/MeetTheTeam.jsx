@@ -1,6 +1,6 @@
 import React from 'react'
 
-const MeetTheTeam = () => {
+const MeetTheTeam = ({screenSize}) => {
   return (
     <div className='About_landing_page' style={{
                     marginLeft: "8vw",
@@ -9,24 +9,26 @@ const MeetTheTeam = () => {
         <p className='main_title_landing_page' >Meet The Team</p>
         <div style={{
             display:'flex',
-            justifyContent:"space-around",
-            marginTop:"5vh"
+            justifyContent:  `${screenSize >900 ? "space-around" :"center"}`,
+            
+            marginTop:"5vh",
+            flexDirection:`${screenSize > 900 ? "row":"column"}`
         }}>
-            <Team_member name={"Charbel El Haddad"} role={"Lead Software Engineer"} github={"https://github.com/CHCICH"} image={"/charbel_photo.png"}/>
-            <Team_member name={"Ali Sobh"} role={"Lead Software Engineer"} github={"https://github.com/Alouchis"} image={"/ali_photo.png"}/>
-            <Team_member name={"Joe Germany"} role={"ML Expert"} github={"https://github.com/joeGermany"} image={"/Joe_photo.png"}/>
+            <Team_member screenSize={screenSize} name={"Charbel El Haddad"} role={"Lead Software Engineer"} github={"https://github.com/CHCICH"} image={"/charbel_photo.png"}/>
+            <Team_member screenSize={screenSize} name={"Ali Sobh"} role={"Lead Software Engineer"} github={"https://github.com/Alouchis"} image={"/ali_photo.png"}/>
+            <Team_member screenSize={screenSize} name={"Joe Germany"} role={"ML Expert"} github={"https://github.com/joeGermany"} image={"/Joe_photo.png"}/>
 
         </div>
     </div>
   )
 }
 
-const Team_member = ({name, role, github,image}) =>{
+const Team_member = ({name, role, github,image,screenSize}) =>{
 
     return (
         <div style={{
             color:"black",
-            width: "20vw",
+            width: `${screenSize >900 ? "20vw":"60vw"}`,
             height: "45vh",
             backgroundColor: "#D9D9D9",
             display: "flex",
@@ -43,7 +45,8 @@ const Team_member = ({name, role, github,image}) =>{
                 alt={name}
                 style={{
                     margin:"2vh",
-                    width: "15vw",
+                    width: `${screenSize >900 ? "15vw":"40vw"}`,
+
                     height: "30vh",
                     borderRadius: "30px",
                     objectFit: "cover",

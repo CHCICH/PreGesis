@@ -6,11 +6,11 @@ import Footer from './SubComponents/Footer'
 import Header from './SubComponents/Header'
 
 
-const Landing = ({color_mode}) => {
+const Landing = ({color_mode,screenSize}) => {
     return (
         <>
-        <Header color_mode={color_mode}></Header>
-        <LandingBody color_mode={color_mode}></LandingBody>
+        <Header color_mode={color_mode} screenSize={screenSize}></Header>
+        <LandingBody color_mode={color_mode} screenSize={screenSize}></LandingBody>
         <Footer color_mode={color_mode} ></Footer>
         </>
     )

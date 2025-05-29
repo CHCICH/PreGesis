@@ -11,7 +11,7 @@ class Point{
 }
 
 
-const TreedAstronaut = () => {
+const TreedAstronaut = ({screenSize}) => {
     function Model({ url }) {
         const { scene } = useGLTF(url)
         return <primitive object={scene} />
@@ -114,11 +114,11 @@ const TreedAstronaut = () => {
             <button
                 className='white_button'
                 style={{
-                    fontSize: '25px',
+                    fontSize: `${screenSize > 900 ? "25px":"20px" }`,
                     position: 'absolute',
                     top: '50%',
                     left: '50%',
-                    width: '20%',
+                    width: `${screenSize > 900 ? "20vw":"30vw" }` ,
                     height: '8%',
                     opacity: 1,
                     zIndex: 1,
@@ -127,6 +127,7 @@ const TreedAstronaut = () => {
                     alignItems: 'center',
                     justifyContent: 'center',
                 }}
+                onClick={()=>{}}
             >
                 Join the community
             </button>

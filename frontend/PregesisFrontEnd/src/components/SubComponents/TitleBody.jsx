@@ -3,8 +3,7 @@ import TreedAstronaut from './TreedAstronaut';
 import { useState } from 'react';
 
 
-const TitleBody = ({color_mode}) => {
-  
+const TitleBody = ({color_mode,screenSize}) => {
   let [style_mode,set_color_mode] = useState({mode1:{}});
   useEffect(()=>{
     if(color_mode == "light"){
@@ -19,7 +18,7 @@ const TitleBody = ({color_mode}) => {
             <p className='main_title_landing_page'>Pregesis</p>
             <p style={{"color":`${style_mode.mode1.color}`, "fontSize":"large", "marginLeft":"0.5vw","marginTop":"5vh"}}>Welcome to Pregesis – AI-Driven Exam Practice, Reimagined</p>
         </div>
-        <TreedAstronaut></TreedAstronaut>
+        <TreedAstronaut screenSize={screenSize}></TreedAstronaut>
         
 
     </div>
