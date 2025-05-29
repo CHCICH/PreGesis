@@ -8,8 +8,12 @@ function App() {
   useEffect(()=>{
     if(color_mode == "light"){
       document.getElementById('root').style.backgroundColor = "white";
+      document.body.style.backgroundColor = "white";
+
     }else{
       document.getElementById('root').style.backgroundColor = "black";
+      document.body.style.backgroundColor = "black";
+
     }
   },[color_mode]) 
   const [screenSize, setScreenSize] = useState(window.innerWidth);
