@@ -7,6 +7,7 @@ body {
     width: 100vs;
     min-height: 100vh;
     overflow-x: hidden;
+    
 }
 
 #root {
@@ -16,9 +17,11 @@ body {
     flex-direction: column;
     height: 100%;
     align-items: center;
+    transition: all 1s;
 }
 
 .header {
+    transition: all 1s;
     animation: hedaerfadeIn 1s ease;
     background-color: rgb(247, 247, 247);
     width: 100%;
@@ -51,6 +54,7 @@ button:hover,
 }
 
 .footer {
+    transition: all 1s;
     width: 100vw;
     min-height: 20vh;
     background: #fff;
@@ -78,6 +82,7 @@ button:hover,
     width: 100%;
     margin: 0 auto;
     margin-top:12vh ;
+    transition: all 1s;
 }
 
 .Logo_title {

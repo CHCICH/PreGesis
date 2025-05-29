@@ -1,9 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect} from 'react'
 
-const WhyPregesis = () => {
+const WhyPregesis = ({color_mode}) => {
     let [arrowClasses_1,setArrowClasses_1] = useState('');
     let [arrowClasses_2,setArrowClasses_2] = useState('');
-
+    let [style_mode,set_color_mode] = useState({mode1:{},mode2:{},mode3:{}});
+         useEffect(()=>{
+           if(color_mode == "light"){
+             set_color_mode({mode1:{color:"#5a5959"},mode2:{color:"black_button"},mode3:{"transition": "ease 1s"}});
+           }else{
+             set_color_mode({mode1:{color:"#b9b9b9"},mode2:{color:"white_button"},mode3:{filter: "invert(1)","transition": "ease 1s"}});
+           }
+         },[color_mode])
   return (
    <div className='About_landing_page' style={{
                     marginLeft: "8vw",
@@ -24,7 +31,7 @@ const WhyPregesis = () => {
                         marginTop: "10vh",
                         width:"50vw",
                         fontSize:"x-large",
-                        color:"#5a5959"
+                        color:`${style_mode.mode1.color}`
                         , lineHeight: "1.5"
                     }}>
                 The transition from high school to university—especially in fields like engineering—can be overwhelming. 
@@ -47,12 +54,12 @@ const WhyPregesis = () => {
                         if(arrowClasses_1 == ""){
                             setArrowClasses_1('animate_arrow_landing');
                         }
-                    }}  className='black_button' style={{
+                    }}  className={style_mode.mode2.color} style={{
                         width:"10vw",
                         height:"5vh",
                         fontSize:"large"
                     }}>Community</button>
-                    <img src="/Icon.png" style={{"transition": "ease 1s"}} className={arrowClasses_1}></img>
+                    <img src="/Icon.png" style={style_mode.mode3} className={arrowClasses_1}></img>
                 </div>
         </div>
 
@@ -72,7 +79,8 @@ const WhyPregesis = () => {
                         marginTop: "10vh",
                         width:"40vw",
                         fontSize:"x-large",
-                        color:"#5a5959"
+                        color:`${style_mode.mode1.color}`
+                        
                         , lineHeight: "1.5"
                     }}>
                         Yet despite this shift, the available learning resources often fall short. Many course materials lack high-quality,
@@ -86,7 +94,7 @@ const WhyPregesis = () => {
             </div>
         </div>
         <div className="final_landing_page_paragraph_div">
-            <p className='final_landing_page_paragraph'>
+            <p className='final_landing_page_paragraph' style={{color:`${style_mode.mode1.color}`}}>
                 Pregesis uses AI to generate exam-level problems that reflect not just the format, but the depth and complexity of real assessments. 
                 Drawing on our understanding of both the subject matter and the common pain points in studying, we created a platform that doesn't just 
                 throw problems at students—it helps them think, visualize, and master concepts that are often missed in robotic, rote preparation.
