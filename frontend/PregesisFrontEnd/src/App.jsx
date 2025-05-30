@@ -6,7 +6,7 @@ function App() {
   const [count, setCount] = useState(0)
   let [color_mode, set_color_mode] =  useState("light"); 
   useEffect(()=>{
-    const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches ? set_color_mode("dark") : set_color_mode("light");
+    const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches ? set_color_mode("light") : set_color_mode("light");
     if(color_mode == "light"){
       document.getElementById('root').style.backgroundColor = "white";
       document.body.style.backgroundColor = "white";

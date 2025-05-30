@@ -214,3 +214,10 @@ button:hover,
         box-sizing: border-box;
     }
 }
+.Dashboard_box{
+    width: 100%;
+    height: 22vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
