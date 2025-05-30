@@ -55,7 +55,7 @@ const Test = ({screenSize}) => {
         ))}
       </div>
       
-      <style jsx>{`
+      <style >{`
         @keyframes bounce {
           0%, 100% {
             transform: translateY(0px);
