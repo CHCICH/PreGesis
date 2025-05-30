@@ -1,6 +1,7 @@
 import React from 'react'
 import { useEffect,useState } from 'react';
 import UpperFilter from './UpperFilter';
+import LowerFilter from './LowerFilter';
 
 const MyLibrary = ({color_mode,screenSize}) => {
     let [style_mode ,setStyle_mode] = useState({mode1:{},mode2:{},mode3:{}});
@@ -19,6 +20,7 @@ const MyLibrary = ({color_mode,screenSize}) => {
         <div style={{paddingLeft:"8vh"}}>
             <p className='main_title_landing_page' style={{fontSize:"xx-large"}} >My Library</p>
             <UpperFilter color_mode={color_mode} screenSize={screenSize} />
+            <LowerFilter color_mode={color_mode} screenSize={screenSize} />
         </div>
     )
 }
