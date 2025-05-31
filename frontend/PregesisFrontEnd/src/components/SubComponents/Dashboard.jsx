@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import DashboardTitle from './DashboardTitle';
 import MyLibrary from './MyLibrary';
+import CreateSession from './CreateSession';
 
 
 const Dashboard = ({color_mode,screenSize}) => {
@@ -22,6 +23,9 @@ const Dashboard = ({color_mode,screenSize}) => {
             <DashboardTitle color_mode={color_mode} screenSize={screenSize} ></DashboardTitle>
             <div className="speration_line_landing_page" style={{...style_mode.mode2,}}></div>
             <MyLibrary color_mode={color_mode} screenSize={screenSize} />
+            <div className="speration_line_landing_page" style={{...style_mode.mode2,}}></div>
+
+            <CreateSession color_mode={color_mode} screenSize={screenSize}/>
         </div>
     );
 };

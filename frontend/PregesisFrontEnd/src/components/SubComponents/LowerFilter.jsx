@@ -106,7 +106,7 @@ const LowerFilter = ({color_mode,screenSize}) => {
 
 const Session_Box = ({color_mode,screenSize,item,set_active_sessions,active_sessions}) =>{
     let [favorite,set_favorite] = useState(item.favorite);
-    const options = ["assets-astronaut-7.webp","assets-astronaut-3.webp", "assets-astronaut-5.webp"  ,"assets-astronaut-4.webp"]
+    const options = ["assets-astronaut-7.webp","assets-astronaut-3.webp", "assets-astronaut-5.webp"  ,"assets-astronaut-4.webp"];
     let [style_mode ,setStyle_mode] = useState({mode1:{},mode2:{},mode3:{}});
     useEffect(()=>{
         if(color_mode == "light"){
