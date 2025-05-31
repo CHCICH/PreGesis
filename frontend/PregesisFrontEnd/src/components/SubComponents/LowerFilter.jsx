@@ -23,7 +23,7 @@ const LowerFilter = ({color_mode,screenSize}) => {
      ])
     return (
         <div style={{display:"flex",flexDirection:screenSize < 900 ? "column" : "row"}} >
-            <div className="filter_box" style={{width: screenSize < 900 ? "70vw": "16vw",height:  screenSize < 900 ? "90vw": "25vw",flexDirection:"column"}}> 
+            <div className="filter_box" style={{color:"black",width: screenSize < 900 ? "70vw": "16vw",height:  screenSize < 900 ? "90vw": "25vw",flexDirection:"column"}}> 
                 <p>Course Filter</p>
                 <div style={{height:"9vh", display:"flex",flexWrap:"wrap"}}>
                     {
@@ -34,8 +34,8 @@ const LowerFilter = ({color_mode,screenSize}) => {
                     }
                 </div>
                 
-                <div style={{marginTop:"1vh"}}>
-                    <label style={{...style_mode.mode3, display: "flex", alignItems: "center", margin: "5px 0"}}>
+                <div style={{marginTop:"1vh",color:"black"}}>
+                    <label style={{ display: "flex", alignItems: "center", margin: "5px 0"}}>
                         <input 
                             type="checkbox" 
                             style={{
@@ -47,7 +47,7 @@ const LowerFilter = ({color_mode,screenSize}) => {
                         />
                         Owned
                     </label>
-                    <label style={{...style_mode.mode3, display: "flex", alignItems: "center", margin: "5px 0"}}>
+                    <label style={{ display: "flex", alignItems: "center", margin: "5px 0"}}>
                         <input 
                             type="checkbox" 
                             style={{
@@ -59,7 +59,7 @@ const LowerFilter = ({color_mode,screenSize}) => {
                         />
                         Shared
                     </label>
-                    <label style={{...style_mode.mode3, display: "flex", alignItems: "center", margin: "5px 0"}}>
+                    <label style={{ display: "flex", alignItems: "center", margin: "5px 0"}}>
                         <input 
                             type="checkbox" 
                             style={{

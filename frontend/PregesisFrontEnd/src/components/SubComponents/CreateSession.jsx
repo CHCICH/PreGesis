@@ -6,12 +6,12 @@ const CreateSession = ({color_mode,screenSize}) => {
     useEffect(()=>{
         if(color_mode == "light"){
             setStyle_mode({
-                mode1: {},
+                mode1: {backgroundColor:"black",color:"white"},
                 mode2: {},
                 mode3: {}
             });
         }else{
-            setStyle_mode({mode1:{backgroundColor:"black",color:"white"},mode2:{backgroundColor:"white",color:"#1E1E1E"},mode3:{color:"white"}});
+            setStyle_mode({mode1:{backgroundColor:"white",color:"black"},mode2:{backgroundColor:"white",color:"#1E1E1E"},mode3:{color:"white"}});
         }
     },[color_mode]);
     let [options, set_options ]= useState([{img:"assets-astronaut-7.webp" ,clicked:true}, {img:"assets-astronaut-3.webp" ,clicked:false}, {img:"assets-astronaut-5.webp" ,clicked:false } ,{img:"assets-astronaut-4.webp" ,clicked:false}]);
@@ -28,7 +28,6 @@ const CreateSession = ({color_mode,screenSize}) => {
             <div style={{
             marginTop:"5vw",
             // display: 'flex',
-            backgroundColor: 'white',
             width:screenSize < 900 ?"80vw" :"60vw",
             height: screenSize < 900 ? "230vw" : "35vw",
             marginBottom:"5vh"
@@ -36,13 +35,13 @@ const CreateSession = ({color_mode,screenSize}) => {
             transition:" all 1s"
             }} >
                 <button style={{
+                    ...style_mode.mode1,
                     marginLeft:0,
                     marginBottom:"2vw",
-                    width: screenSize<900 ? "50vw": "12vw",
+                    height:screenSize <900 ? "": "2.5vw",
+                    width: screenSize<900 ? "50vw": "15vw",
                     borderRadius: "20px",
                     border: "none",
-                    backgroundColor: "black",
-                    color: "white",
                     fontSize: "16px",
                     cursor: "pointer",
                     margin: "20px",
@@ -87,7 +86,7 @@ const CreateSession = ({color_mode,screenSize}) => {
                                 borderRadius: '10px'
                             }}>
                                 <div>
-                                    <label style={{ display: 'block', marginBottom: '8px', fontSize: '20px' }}>Title</label>
+                                    <label style={{ color:"black", display: 'block', marginBottom: '8px', fontSize: '20px' }}>Title</label>
                                     <input 
                                         type="text" 
                                         placeholder="Enter session title"
@@ -104,7 +103,7 @@ const CreateSession = ({color_mode,screenSize}) => {
                                 </div>
                                 
                                 <div style={{ margin: '10px 0' }}>
-                                    <label style={{ display: 'block', marginBottom: '8px', fontSize: '18px' }}>Type</label>
+                                    <label style={{ color:"black", display: 'block', marginBottom: '8px', fontSize: '18px' }}>Type</label>
                                     <select style={{
                                         width: '100%',
                                         padding: '10px',
@@ -122,7 +121,7 @@ const CreateSession = ({color_mode,screenSize}) => {
                                 </div>
                                 
                                 <div style={{ margin: '10px 0' }}>
-                                    <label style={{ display: 'block', marginBottom: '8px',  fontSize: '18px' }}>Course</label>
+                                    <label style={{ color:"black", display: 'block', marginBottom: '8px',  fontSize: '18px' }}>Course</label>
                                     <select style={{
                                         width: '100%',
                                         padding: '10px',
