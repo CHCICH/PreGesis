@@ -77,7 +77,6 @@ const Clickable_component = ({screenSize, color_mode,text,clicked , filter_butto
             setStyle_mode({mode1:{backgroundColor:"light-grey",color:"black"},mode2:{backgroundColor:"white",color:"#1E1E1E"},mode3:{color:"white"}});
         }
     },[color_mode])
-    console.log(screenSize)
     return(
         <button 
             style={{

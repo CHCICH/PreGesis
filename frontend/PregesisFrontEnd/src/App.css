@@ -235,4 +235,14 @@ button:hover,
     padding: 2vw;
     padding-top: 1vh;
 
+
+}
+
+
+.box_session{
+    background-color: #afafaf;
+    margin-top: 2vh;
+    margin-left: 3vw;
+    border-radius: 10px;
+    transition: 1s all;
 }
