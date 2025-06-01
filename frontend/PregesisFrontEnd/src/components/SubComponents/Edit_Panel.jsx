@@ -17,6 +17,7 @@ const Edit_Panel = ({color_mode,screenSize,edit_on,set_edit_on,edit_enable,set_e
       },[color_mode]) 
   return (
     <div style={{
+      marginTop:screenSize <900 ? "9vw":"",
       transition:"1s all",
       position: "fixed",
       top: "50%",
@@ -24,14 +25,15 @@ const Edit_Panel = ({color_mode,screenSize,edit_on,set_edit_on,edit_enable,set_e
       transform:edit_on ?"translate(-50%, -50%)":"translate(200%,-50%)",
       zIndex: 1000,
       backgroundColor:'#f5f5f5',
-      height:"40vw",
+      height:screenSize < 900 ? "90vh" :"40vw",
       boxShadow: "0 4px 20px rgba(0, 0, 0, 0.29)",
       borderRadius:"15px",
       display:"flex",
       justifyContent:"center",
       alignItems:"center",
       opacity: edit_on ? 1 : 0,
-      visibility: edit_on ? "visible" : "hidden"
+      visibility: edit_on ? "visible" : "hidden",
+      overflowY:"scroll"
     }}>
         <button 
           style={{
@@ -49,8 +51,9 @@ const Edit_Panel = ({color_mode,screenSize,edit_on,set_edit_on,edit_enable,set_e
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            width:"5vw",
-            height:"2.5vw"
+            width:screenSize<900 ? "10vw":"5vw",
+            height:screenSize<900 ? "5vw" :"2.5vw",
+            marginLeft:screenSize < 900 ? "60vw" :"",
           }}
           onClick={() => {set_edit_on(false);
             setTimeout(()=>set_edit_enable(true),1000);
