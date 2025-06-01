@@ -17,7 +17,7 @@ const Edit_Panel = ({color_mode,screenSize,edit_on,set_edit_on,edit_enable,set_e
       },[color_mode]) 
   return (
     <div style={{
-      marginTop:screenSize <900 ? "9vw":"",
+      marginTop:screenSize <900 ? "5vw":"",
       transition:"1s all",
       position: "fixed",
       top: "50%",
@@ -25,7 +25,7 @@ const Edit_Panel = ({color_mode,screenSize,edit_on,set_edit_on,edit_enable,set_e
       transform:edit_on ?"translate(-50%, -50%)":"translate(200%,-50%)",
       zIndex: 1000,
       backgroundColor:'#f5f5f5',
-      height:screenSize < 900 ? "90vh" :"40vw",
+      height:screenSize < 900 ? "100vh" :"40vw",
       boxShadow: "0 4px 20px rgba(0, 0, 0, 0.29)",
       borderRadius:"15px",
       display:"flex",

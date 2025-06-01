@@ -119,8 +119,9 @@ const Session_Box = ({color_mode,screenSize,item,set_active_sessions,active_sess
             setStyle_mode({mode1:{backgroundColor:"black",color:"white"},mode2:{backgroundColor:"white",color:"#1E1E1E"},mode3:{color:"white"}});
         }
     },[color_mode]);
+    
     return(
-        <div className='box_session' style={{width:screenSize < 900 ? "60vw" : "26vw", height:"40vh", position: "relative"}}>
+        <div className='box_session' style={{width:screenSize < 900 ? "60vw" : "26vw", height:   (900 < screenSize && screenSize < 1100) ? "30vh":"40vh", position: "relative"}}>
         <div style={{
             transition:"1s all",
             width: "100%",
@@ -197,6 +198,7 @@ const Session_Box = ({color_mode,screenSize,item,set_active_sessions,active_sess
                             return session;
                         })
                         set_active_sessions(temp);
+                        console.log("size",screenSize)
                     }}></img>
                 </button>
             </div>

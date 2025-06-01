@@ -3,7 +3,6 @@ import { useState,useEffect } from 'react';
 
 const CreateSession = ({color_mode,screenSize,style,hide_create_session}) => {
     let [style_mode ,setStyle_mode] = useState({mode1:{},mode2:{},mode3:{}});
-    console.log(screenSize)
     useEffect(()=>{
         if(color_mode == "light"){
             setStyle_mode({
@@ -30,7 +29,7 @@ const CreateSession = ({color_mode,screenSize,style,hide_create_session}) => {
             marginTop:"5vw",
             // display: 'flex',
             width:screenSize < 900 ?"80vw" :"60vw",
-            height: screenSize < 900 ? "230vw" : "35vw",
+            height: screenSize < 900 ? "95vh" : 900 < screenSize && screenSize < 1200 ? "45vw" :"35vw",
             marginBottom:"5vh"
             ,borderRadius:"10px",
             transition:" all 1s"
@@ -54,7 +53,7 @@ const CreateSession = ({color_mode,screenSize,style,hide_create_session}) => {
                     alignItems: "center",
                     justifyContent: "center",
                     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.38)',
-
+                    padding:900 <screenSize && screenSize <1200? "20px" : "",
                     gap: "8px"
                 }}>
                     <span style={{ fontSize: "23px" }}>+</span>
@@ -65,7 +64,7 @@ const CreateSession = ({color_mode,screenSize,style,hide_create_session}) => {
                     display: 'flex',
                     backgroundColor: '#f5f5f5',
                     width:screenSize < 900 ?"80vw" :"60vw",
-                    height: screenSize < 1200 ? "100%" :"82.5%",
+                    height: screenSize < 900 ? "100%" :"82.5%",
                     borderRadius:"20px",
                     transition:" all 1s",
                     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
