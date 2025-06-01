@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState,useEffect } from 'react';
 
-const CreateSession = ({color_mode,screenSize}) => {
+const CreateSession = ({color_mode,screenSize,style,hide_create_session}) => {
     let [style_mode ,setStyle_mode] = useState({mode1:{},mode2:{},mode3:{}});
     useEffect(()=>{
         if(color_mode == "light"){
@@ -18,7 +18,7 @@ const CreateSession = ({color_mode,screenSize}) => {
 
     return (
         <>
-        <p className='main_title_landing_page' style={{fontSize:"xx-large",marginLeft:"10vw"}} >Create Session</p>
+        {hide_create_session ? "":<p className='main_title_landing_page' style={{fontSize:"xx-large",marginLeft:"10vw"}} >Create Session</p>}
 
         
         <div style={{
@@ -34,6 +34,8 @@ const CreateSession = ({color_mode,screenSize}) => {
             ,borderRadius:"10px",
             transition:" all 1s"
             }} >
+                {
+                    hide_create_session ? <p style={{ color:"black", display: 'block', marginBottom: '8px',  fontSize: '23px',marginLeft:"2vw" }} >Edit your Session</p>:
                 <button style={{
                     ...style_mode.mode1,
                     marginLeft:0,
@@ -57,6 +59,7 @@ const CreateSession = ({color_mode,screenSize}) => {
                     <span style={{ fontSize: "23px" }}>+</span>
                     Create New Session
                 </button>
+                }
                 <div style={{
                     display: 'flex',
                     backgroundColor: '#f5f5f5',
@@ -65,6 +68,8 @@ const CreateSession = ({color_mode,screenSize}) => {
                     borderRadius:"20px",
                     transition:" all 1s",
                     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+                    ...style
+
 
                     }} >
                         <div style={{
@@ -149,6 +154,7 @@ const CreateSession = ({color_mode,screenSize}) => {
                                 gridTemplateRows: '1fr 1fr',
                                 gap: '15px'
                             }}>
+                                
                                 {options.map((option, index) => (
                                     <div key={index} style={{
                                         backgroundColor: '#ddd',

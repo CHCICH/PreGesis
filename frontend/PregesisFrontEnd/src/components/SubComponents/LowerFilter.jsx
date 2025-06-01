@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect,useState } from 'react';
 import DualThumbSlider from './DualThumbSlider';
 
-const LowerFilter = ({color_mode,screenSize}) => {
+const LowerFilter = ({color_mode,screenSize,set_edit_enable,set_edit_on,edit_on,edit_enable}) => {
     let [style_mode ,setStyle_mode] = useState({mode1:{},mode2:{},mode3:{}});
         useEffect(()=>{
             if(color_mode == "light"){
@@ -28,7 +28,7 @@ const LowerFilter = ({color_mode,screenSize}) => {
                 <div style={{height:"9vh", display:"flex",flexWrap:"wrap"}}>
                     {
                         tags.map(item => {
-                            return(<div key={item} style={{marginRight:screenSize < 900 ? "5vh":"",display:"flex", justifyContent:"space-between",alignItems:"center",backgroundColor: "#f0f0f0", padding: "4px 8px", margin: "2px", borderRadius: "4px",height:"3vh",width:screenSize<900 ? "18vw" :"6vw",fontSize:"small", border: "none"}}>
+                            return(<div key={item} style={{marginRight:screenSize < 900 ? "5vh":"",display:"flex", justifyContent:"space-between",alignItems:"center",backgroundColor: "#f0f0f0", padding: "4px 8px", borderRadius: "4px",height:"3vh",width:screenSize<900 ? "18vw" :"6vw",fontSize:"small", border: "none"}}>
                                 {item} <button style={{border: "none",borderRadius:"5px"}}>X</button></div>)
                         })
                     }
@@ -95,7 +95,7 @@ const LowerFilter = ({color_mode,screenSize}) => {
             }}>
                {
                 active_sessions.map(item =>{
-                    return(<Session_Box key={item.id} active_sessions={active_sessions} set_active_sessions={set_active_sessions} color_mode={color_mode} screenSize={screenSize} item={item} ></Session_Box>)
+                    return(<Session_Box set_edit_on={set_edit_on} edit_on={edit_on} edit_enable = {edit_enable}  set_edit_enable={set_edit_enable} key={item.id} active_sessions={active_sessions} set_active_sessions={set_active_sessions} color_mode={color_mode} screenSize={screenSize} item={item} ></Session_Box>)
                 })
                }
             </div>
@@ -104,7 +104,7 @@ const LowerFilter = ({color_mode,screenSize}) => {
     )
 }
 
-const Session_Box = ({color_mode,screenSize,item,set_active_sessions,active_sessions}) =>{
+const Session_Box = ({color_mode,screenSize,item,set_active_sessions,active_sessions,set_edit_enable,set_edit_on,edit_on,edit_enable}) =>{
     let [favorite,set_favorite] = useState(item.favorite);
     const options = ["assets-astronaut-7.webp","assets-astronaut-3.webp", "assets-astronaut-5.webp"  ,"assets-astronaut-4.webp"];
     let [style_mode ,setStyle_mode] = useState({mode1:{},mode2:{},mode3:{}});
@@ -150,7 +150,15 @@ const Session_Box = ({color_mode,screenSize,item,set_active_sessions,active_sess
                     alignItems: "center",
                     justifyContent: "center",
                     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)"
-                }}>
+                }}
+                onClick={()=>{
+                    if(!edit_on){
+                        set_edit_on(false);
+                        setTimeout(()=>set_edit_on(true),500);
+                        set_edit_enable(false);
+                    }
+                }}
+                >
                     <img src="edit.png"></img>
                 </button>
                 <button style={{
