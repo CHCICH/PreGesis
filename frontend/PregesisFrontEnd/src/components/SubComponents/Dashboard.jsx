@@ -4,6 +4,7 @@ import DashboardTitle from './DashboardTitle';
 import MyLibrary from './MyLibrary';
 import CreateSession from './CreateSession';
 import Edit_Panel from './Edit_Panel';
+import Testing from './Testing';
 
 
 const Dashboard = ({color_mode,screenSize}) => {
@@ -25,12 +26,12 @@ const Dashboard = ({color_mode,screenSize}) => {
         <div className="Landing_body" style={style_mode.mode1}>
             <DashboardTitle color_mode={color_mode} screenSize={screenSize} ></DashboardTitle>
             <div className="speration_line_landing_page" style={{...style_mode.mode2,}}></div>
-            <MyLibrary color_mode={color_mode} screenSize={screenSize} set_edit_on={set_edit_on} edit_on={edit_on} edit_enable = {edit_enable}  set_edit_enable={set_edit_enable} />
+            {/* <MyLibrary color_mode={color_mode} screenSize={screenSize} set_edit_on={set_edit_on} edit_on={edit_on} edit_enable = {edit_enable}  set_edit_enable={set_edit_enable} />
             {!edit_enable?<Edit_Panel color_mode={color_mode} screenSize={screenSize} set_edit_on={set_edit_on} edit_on={edit_on} edit_enable = {edit_enable}  set_edit_enable={set_edit_enable}/>:""}
             <div className="speration_line_landing_page" style={{...style_mode.mode2,}}></div>
 
-            <CreateSession color_mode={color_mode} screenSize={screenSize}/>
-
+            <CreateSession color_mode={color_mode} screenSize={screenSize}/> */}
+            <Testing color_mode={color_mode} screenSize={screenSize} />
         </div>
     );
 };

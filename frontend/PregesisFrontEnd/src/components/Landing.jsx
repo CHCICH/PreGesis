@@ -5,6 +5,7 @@ import LandingBody from './SubComponents/LandingBody'
 import Footer from './SubComponents/Footer'
 import Header from './SubComponents/Header'
 import Dashboard from './SubComponents/Dashboard'
+import Testing from './SubComponents/Testing'
 
 
 const Landing = ({color_mode,screenSize}) => {
