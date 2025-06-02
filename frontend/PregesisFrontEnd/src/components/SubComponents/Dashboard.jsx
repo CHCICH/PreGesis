@@ -5,6 +5,7 @@ import MyLibrary from './MyLibrary';
 import CreateSession from './CreateSession';
 import Edit_Panel from './Edit_Panel';
 import Testing from './Testing';
+import Session_inside from './Session_inside';
 
 
 const Dashboard = ({color_mode,screenSize}) => {
@@ -31,7 +32,8 @@ const Dashboard = ({color_mode,screenSize}) => {
             <div className="speration_line_landing_page" style={{...style_mode.mode2,}}></div>
 
             <CreateSession color_mode={color_mode} screenSize={screenSize}/> */}
-            <Testing color_mode={color_mode} screenSize={screenSize} />
+            {/* <Testing color_mode={color_mode} screenSize={screenSize} /> */}
+            <Session_inside color_mode={color_mode} screenSize={screenSize}/>
         </div>
     );
 };
