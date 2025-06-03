@@ -5,22 +5,23 @@ const Problem_Box = ({problem,color_mode,screenSize}) => {
     let [open_more, set_edit_more] = useState(true);
     return (
         <>
-            <div style={{ position: 'relative' }}>
+            <div style={{ position: 'relative'}}>
                 <div style={{
-                width: '30vw',
-                height: '10vw',
-                border: '1px solid #ccc',
-                borderRadius: '8px',
-                padding: '16px',
-                boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-                backgroundColor:color_mode == "dark" ? "white": "#5C5C5C",
-                color:color_mode == "dark" ? "black" : "white",
-                transition:"1s all",
-                margin:"2vw",
-            
+                    transition:"1s all",
+                    width: screenSize<900 ? "65vw" :'30vw',
+                    height: screenSize<900 ?"25vh" :'10vw',
+                    border: '1px solid #ccc',
+                    borderRadius: '8px',
+                    padding: '16px',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                    backgroundColor:color_mode == "dark" ? "white": "#5C5C5C",
+                    color:color_mode == "dark" ? "black" : "white",
+                    transition:"1s all",
+                    margin:"2vw",
+                    
             }}>
                 <div style={{display:"flex", justifyContent:"space-between",transition:"1s all"}}>
-                    <p style={{ margin: '0 0 12px 0', fontSize: '25px',width:"20vw",overflow:"hidden", height:"8vh"}}>{problem.Title}</p>
+                    <p style={{ margin: '0 0 12px 0', fontSize: screenSize<900 ? "15px" :'25px',width:"20vw",overflow:"hidden", height:"8vh"}}>{problem.Title}</p>
                     <div>
                         {
                             problem.liked ? <> <img 
@@ -35,8 +36,17 @@ const Problem_Box = ({problem,color_mode,screenSize}) => {
                     display: 'flex',
                     alignItems: 'center',
                     gap: '12px',
-                    marginTop:"3vw"
+                    marginTop:"3vw",
+                    flexDirection:screenSize<900 ? "column":"",
+                    justifyContent:screenSize <900 ? "center": "end"
                 }}>
+                    <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '12px',
+                    
+                }} >
+
                     <span style={{
                         backgroundColor: '#ffffff',
                         color: '#000000',
@@ -61,6 +71,7 @@ const Problem_Box = ({problem,color_mode,screenSize}) => {
                             fontSize: '16px'
                         }}>AI</span>
                     )}
+                    </div>
                     <button style={{
                         backgroundColor: 'black',
                         color: '#ffffff',
@@ -69,16 +80,19 @@ const Problem_Box = ({problem,color_mode,screenSize}) => {
                         border: 'none',
                         cursor: 'pointer',
                         fontSize: '16px',
-                        marginLeft: 'auto'
+                        marginLeft: 'auto',
+                        width:screenSize < 900 && "65vw",
+                        transition:"1s all",
+                        marginTop:screenSize <900 &&"3vw"
                     }}>OPEN</button>
                     {  (
                         <div style={{
                             transition:"1s all",
                             position: 'absolute',
-                            top: "1vw",
-                            left: '35vw',
-                            width: '5vw',
-                            height: '10vw',
+                            top: "4rem",
+                            right: screenSize < 900 ? "1rem" :"-4rem",
+                            width: '5rem',
+                            height: '10rem',
                             backgroundColor: color_mode == "light" ? "black" : "white",
                             color: color_mode == "dark" ? "black" : "white",
                             border: '1px solid #ccc',
@@ -90,12 +104,12 @@ const Problem_Box = ({problem,color_mode,screenSize}) => {
                             overflow:"none",
                             opacity: open_more ? 0 : 1,
                             pointerEvents: open_more ? 'none' : 'auto',
-                            gap: '1vw'
+                            gap: '1rem'
                             
                         }}>
-                            <img src="/icon1.png" alt="Option 1" style={{ width: '30px', height: '30px', cursor: 'pointer' }} onClick={() => console.log('Image 1 clicked')} />
-                            <img src="/icon2.png" alt="Option 2" style={{ width: '30px', height: '30px', cursor: 'pointer' }} onClick={() => console.log('Image 2 clicked')} />
-                            <img src="/icon3.png" alt="Option 3" style={{ width: '30px', height: '30px', cursor: 'pointer' }} onClick={() => console.log('Image 3 clicked')} />
+                            <img src="/delete.png" alt="Option 1" style={{ width: '30px', height: '30px', cursor: 'pointer',filter:"invert(1)"}} onClick={() => console.log('Image 1 clicked')} />
+                            <img src="/Share.png" alt="Option 2" style={{ width: '30px', height: '30px', cursor: 'pointer' ,filter:"invert(1)"}} onClick={() => console.log('Image 2 clicked')} />
+                            <img src="/Git branch.png" alt="Option 3" style={{ width: '30px', height: '30px', cursor: 'pointer' ,filter:"invert(1)"}} onClick={() => console.log('Image 3 clicked')} />
                         </div>
                     )}
                 </div>

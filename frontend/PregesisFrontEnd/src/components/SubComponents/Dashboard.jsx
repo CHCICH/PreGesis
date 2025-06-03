@@ -12,17 +12,19 @@ const Dashboard = ({color_mode,screenSize}) => {
      let [edit_on, set_edit_on] = useState(false);
     let [edit_enable, set_edit_enable] = useState(true);
     let [style_mode ,setStyle_mode] = useState({mode1:{},mode2:{},mode3:{}});
-              useEffect(()=>{
-                  if(color_mode == "light"){
-                      setStyle_mode({
-                          mode1: {},
-                          mode2: {},
-                          mode3: {}
-                      });
-                  }else{
-                      setStyle_mode({mode1:{backgroundColor:"black",color:"white"},mode2:{backgroundColor:"white",color:"#1E1E1E"},mode3:{color:"white"}});
-                  }
-              },[color_mode]) 
+    useEffect(()=>{
+        if(color_mode == "light"){
+            setStyle_mode({
+                mode1: {},
+                mode2: {},
+                mode3: {}
+            });
+        }else{
+            setStyle_mode({mode1:{backgroundColor:"black",color:"white"},mode2:{backgroundColor:"white",color:"#1E1E1E"},mode3:{color:"white"}});
+        }
+    },[color_mode]) 
+    let [active_session,set_active_session] = useState({id:1,favorite:false,picture:0 , title:"Rigorous Exam Prep", session_type:"Recom Session", capacity:"3/10", course:"Math 201"});
+    
     return (
         <div className="Landing_body" style={style_mode.mode1}>
             <DashboardTitle color_mode={color_mode} screenSize={screenSize} ></DashboardTitle>
@@ -33,7 +35,7 @@ const Dashboard = ({color_mode,screenSize}) => {
 
             <CreateSession color_mode={color_mode} screenSize={screenSize}/> */}
             {/* <Testing color_mode={color_mode} screenSize={screenSize} /> */}
-            <Session_inside color_mode={color_mode} screenSize={screenSize}/>
+            <Session_inside color_mode={color_mode} screenSize={screenSize} background_image={active_session.picture} titlle={active_session.title} tags={[active_session.session_type,active_session.course,active_session.capacity]} />
         </div>
     );
 };
