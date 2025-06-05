@@ -6,6 +6,7 @@ import CreateSession from './CreateSession';
 import Edit_Panel from './Edit_Panel';
 import Testing from './Testing';
 import Session_inside from './Session_inside';
+import Problem from './Problem';
 
 
 const Dashboard = ({color_mode,screenSize}) => {
@@ -24,7 +25,7 @@ const Dashboard = ({color_mode,screenSize}) => {
         }
     },[color_mode]) 
     let [active_session,set_active_session] = useState({id:1,favorite:false,picture:0 , title:"Rigorous Exam Prep", session_type:"Recom Session", capacity:"3/10", course:"Math 201"});
-    
+    let problem = "\\text{This problem is a little bit tricky and needs deep visualization; don't underestimate it. It also requires some complex equations. Set up but do not integrate the iterated triple integral bounded by } \\frac{y^{2}}{0.1}+\\frac{x^{2}}{0.2}=3 \\text{, } z= x^2+ y^2 \\text{ and } y = x^2 + z^2 \\text{. } dV(x,y,z) \\text{ should be in the form } dxdA(y,z) \\text{ or } dydA(x,z) \\text{.}";
     return (
         <div className="Landing_body" style={style_mode.mode1}>
             <DashboardTitle color_mode={color_mode} screenSize={screenSize} ></DashboardTitle>
@@ -33,9 +34,11 @@ const Dashboard = ({color_mode,screenSize}) => {
             {!edit_enable?<Edit_Panel color_mode={color_mode} screenSize={screenSize} set_edit_on={set_edit_on} edit_on={edit_on} edit_enable = {edit_enable}  set_edit_enable={set_edit_enable}/>:""}
             <div className="speration_line_landing_page" style={{...style_mode.mode2,}}></div>
 
-            <CreateSession color_mode={color_mode} screenSize={screenSize}/> */}
-            {/* <Testing color_mode={color_mode} screenSize={screenSize} /> */}
+            <CreateSession color_mode={color_mode} screenSize={screenSize}/>
+            <Testing color_mode={color_mode} screenSize={screenSize} />
             <Session_inside color_mode={color_mode} screenSize={screenSize} background_image={active_session.picture} titlle={active_session.title} tags={[active_session.session_type,active_session.course,active_session.capacity]} />
+            */}
+            <Problem color_mode={color_mode} screenSize={screenSize} title={"Problem #143 triple integrals in elipsoidal object"} problem={problem} description />
         </div>
     );
 };

@@ -10,10 +10,6 @@ class Point{
     }
 }
 
-
-
-
-
 const TreedAstronaut = ({screenSize}) => {
     function Model({ url }) {
         const { scene } = useGLTF(url)

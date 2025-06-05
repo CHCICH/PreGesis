@@ -44,7 +44,7 @@ const Session_inside = ({color_mode,screenSize,titlle,tags,background_image}) =>
                 ))}
             </div>
         </div>
-        <div style={{overflowX:"hidden",overflowY:"scroll", display:"flex",backgroundColor:"rgb(224, 224, 224)",width:"80vw",justifyContent:"space-around",flexWrap:"wrap",height:"80vh",borderRadius:"10px",transition:"1s all"}}>
+        <div style={{overflowX:"hidden",overflowY:"scroll", display:"flex",backgroundColor:"rgb(224, 224, 224)",width:"90vw",justifyContent:"space-around",flexWrap:"wrap",height:"80vh",borderRadius:"10px",transition:"1s all"}}>
 
             {
                 problems.map(item =>{
