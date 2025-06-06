@@ -13,8 +13,10 @@
     "@react-three/drei": "^10.0.8",
     "@react-three/fiber": "^9.1.2",
     "better-react-mathjax": "^2.3.0",
+    "plotly.js-dist": "^3.0.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-plotly.js": "^2.6.0",
     "three": "^0.176.0"
   },
   "devDependencies": {
