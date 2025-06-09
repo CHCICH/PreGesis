@@ -30,14 +30,14 @@ const Dashboard = ({color_mode,screenSize}) => {
         <div className="Landing_body" style={style_mode.mode1}>
             <DashboardTitle color_mode={color_mode} screenSize={screenSize} ></DashboardTitle>
             <div className="speration_line_landing_page" style={{...style_mode.mode2,}}></div>
-            {/* <MyLibrary color_mode={color_mode} screenSize={screenSize} set_edit_on={set_edit_on} edit_on={edit_on} edit_enable = {edit_enable}  set_edit_enable={set_edit_enable} />
+            <MyLibrary color_mode={color_mode} screenSize={screenSize} set_edit_on={set_edit_on} edit_on={edit_on} edit_enable = {edit_enable}  set_edit_enable={set_edit_enable} />
             {!edit_enable?<Edit_Panel color_mode={color_mode} screenSize={screenSize} set_edit_on={set_edit_on} edit_on={edit_on} edit_enable = {edit_enable}  set_edit_enable={set_edit_enable}/>:""}
             <div className="speration_line_landing_page" style={{...style_mode.mode2,}}></div>
 
             <CreateSession color_mode={color_mode} screenSize={screenSize}/>
             <Testing color_mode={color_mode} screenSize={screenSize} />
             <Session_inside color_mode={color_mode} screenSize={screenSize} background_image={active_session.picture} titlle={active_session.title} tags={[active_session.session_type,active_session.course,active_session.capacity]} />
-            */}
+           
             <Problem course={"MATH 201"} author={"CHICH"} difficulty={8} color_mode={color_mode} screenSize={screenSize} title={"Problem #143 triple integrals in elipsoidal object"} problem={problem} description />
         </div>
     );
