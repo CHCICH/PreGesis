@@ -1,18 +1,23 @@
 {
-  "name": "pregesis",
+  "name": "api",
   "version": "1.0.0",
-  "description": "api",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server/main.js",
-    "dev": "nodemon server/main.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev":"nodemon server/main.ts"
   },
-  "author": "CHICH",
-  "license": "MIT",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.0",
+    "@types/nodemon": "^3.1.1",
     "cors": "^2.8.5",
-    "email-validator": "^2.0.4",
-    "nodemon": "^3.1.9"
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10",
+    "typescript": "^5.8.3"
   }
 }

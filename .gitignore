@@ -23,3 +23,4 @@ frontend/PregesisFrontEnd/*.ntvs*
 frontend/PregesisFrontEnd/*.njsproj
 frontend/PregesisFrontEnd/*.sln
 frontend/PregesisFrontEnd/*.sw?
+api/node_modules
