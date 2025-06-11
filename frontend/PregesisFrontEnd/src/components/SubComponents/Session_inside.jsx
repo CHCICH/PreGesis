@@ -21,7 +21,7 @@ const Session_inside = ({color_mode,screenSize,titlle,tags,background_image}) =>
       },[color_mode]) 
     const problems = [{Title:"Tangent planes and normal lines", Chapter:"Analytical Geometry", Difficulity:"3/10", AI:true,liked:true},{Title:"Ratio test", Chapter:"Infinite Series", Difficulity:"6/10", AI:true,liked:false}];
     return (
-       <div className="Landing_body" style={{display:"flex",alignItems:"center",flexDirection:"column"}}>
+       <div className="Landing_body" style={{display:"flex",alignItems:"center",flexDirection:"column",...style_mode.mode1}}>
         <div style={{marginBottom:"3vw",width:"90vw", height:"30vh",borderRadius:"10px",backgroundImage:`url(/${options[background_image]})`,display:"flex",flexDirection:"column", padding:"2vw",position:"relative"}}>
             <div style={{position:"absolute",top:0,left:0,width:"100%",height:"100%",backgroundColor:"gray",opacity:0.6,borderRadius:"10px"}}></div>
             <p className='main_title_landing_page' style={{fontSize:"xxx-large",color:'white',position:"relative",zIndex:1,marginBottom:"2vw"}} >{"Live Session"}</p>

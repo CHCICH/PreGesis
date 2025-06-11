@@ -107,13 +107,14 @@ function ThreeDSurfaceGraph() {
   };
 
   return (
-    <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+    <div style={{ width: '100%', display: 'flex', justifyContent: 'center',marginTop:"4vw"}}>
       <Plot
         data={data}
         layout={layout}
         // You can add additional props like `useResizeHandler` for responsive design
         useResizeHandler={true}
-        style={{ width: '100%', maxWidth: '800px' }} // Control overall size
+        style={{ width: '100%', maxWidth: '800px'}} // Control overall size
+        
       />
     </div>
   );
