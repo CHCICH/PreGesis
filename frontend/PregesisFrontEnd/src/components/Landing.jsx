@@ -17,6 +17,7 @@ const Landing = ({color_mode,screenSize}) => {
         <Footer color_mode={color_mode} ></Footer>
         </>
     )
+    
 }
 
 export default Landing
