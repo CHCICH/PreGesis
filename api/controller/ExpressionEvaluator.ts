@@ -40,8 +40,8 @@ const checkExpressionValidity:(expr: string) => invalid_output = (expr:string) =
             error_stacker["incorrectStartEnd"] = {reason:"cannot start or end with multiplication or a division sign",error_type:"INCORRECT_STARTING_CHAR"};
         }
         //decimal checking
-        if((i > 0  && (expr[i] == "*" && isNaN(Number(expr[i-1])) || (expr[i] == "/" && isNaN(Number(expr[i-1]))))) && !error_stacker["repeatedMultiplicationDivison"]){
-            error_stacker["repeatedMultiplicationDivison"] = error_stacker["incorrectCharacter"] =  {reason:"invalid synthax cannot process multiplication and division syntax should look like {valid_expression} {*,/} {valid_expression}", error_type:"REPEATED_MULT/DIV"};
+        if((i > 0  && (expr[i] == "." && isNaN(Number(expr[i-1])) )) && !error_stacker["decimalInvalidity"]){
+            error_stacker["decimalInvalidity"] = error_stacker["incorrectCharacter"] =  {reason:"invalid synthax cannot process this decimal number", error_type:"DECIMAL_NUMBER"};
         }
 
         //checking the validity of cos, sin, tan and ln 
