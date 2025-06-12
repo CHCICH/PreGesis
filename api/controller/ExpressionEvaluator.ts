@@ -8,26 +8,51 @@ interface operation_stacker_object{
 interface invalid_output{
     reason:string;
     validity:boolean;
+    error_stack:{ [key: string]: Error_stacker };
+}
+
+interface Error_stacker{
+    error_type:string;
+    reason:string;
 }
 
 const checkExpressionValidity:(expr: string) => invalid_output = (expr:string) =>{
     expr = expr.replace(/\s/g, '');
     expr = expr.replace(/cos/g, 'c').replace(/sin/g, 's').replace(/tan/g, 't').replace(/arc/g, 'a').replace(/ln/g, 'l');
-    const invalidCharRegex = /[^a-zA-Z0-9*\/^()+\-\s]/;
+
+    const invalidCharRegex = /[^0-9lscte*\/^().+\-]/;
+    let error_stacker: { [key: string]: Error_stacker } = {};
+
+    // checking for invalid characters 
     if(invalidCharRegex.test(expr)){
-        return {reason:"expression contains invalid characters. Only letters, digits, +, -, *, /, ^, (, ) are allowed", validity:false};
+        error_stacker["incorrectCharacter"] = {reason:"expression contains invalid characters. Only letters, digits, +, -, *, /, ^, (, ), .are allowed", error_type:"INCORRECT_CHARACTER"};
     }
     let opened = 0;
     for(let i: number = 0; i< expr.length;i++){
-        if(i < expr.length -1 && (expr[i] == "*" && isNaN(Number(expr[i+1])) || (expr[i] == "/" && isNaN(Number(expr[i+1]))))){
-            return {reason:"invalid synthax cannot process multiplication and division syntax should look like {valid_expression} {*,/} {valid_expression}" , validity:false};
+        //checking for invalid multiplication or divison
+        if(i < expr.length -1 && (expr[i] == "*" && isNaN(Number(expr[i+1])) || (expr[i] == "/" && isNaN(Number(expr[i+1])))) && !error_stacker["repeatedMultiplicationDivison"]){
+            error_stacker["repeatedMultiplicationDivison"] = {reason:"invalid synthax cannot process multiplication and division syntax should look like {valid_expression} {*,/} {valid_expression}" , error_type:"REPEATED_MULT/DIV"};
         }
-        if(i > 0  && (expr[i] == "*" && isNaN(Number(expr[i-1])) || (expr[i] == "/" && isNaN(Number(expr[i-1]))))){
-            return {reason:"invalid synthax cannot process multiplication and division syntax should look like {valid_expression} {*,/} {valid_expression}", validity:false};
+        if((i > 0  && (expr[i] == "*" && isNaN(Number(expr[i-1])) || (expr[i] == "/" && isNaN(Number(expr[i-1]))))) && !error_stacker["repeatedMultiplicationDivison"]){
+            error_stacker["repeatedMultiplicationDivison"] = error_stacker["incorrectCharacter"] =  {reason:"invalid synthax cannot process multiplication and division syntax should look like {valid_expression} {*,/} {valid_expression}", error_type:"REPEATED_MULT/DIV"};
         }
-        if((( i == 0 || i == expr.length)&& (expr[i] == "*" ||  expr[i] == "/" || expr[i] == "+" || expr[i] == "-"))){
-            return {reason:"cannot start or end with multiplication or a division sign",validity:false};
+        if((( i == 0 || i == expr.length-1)&& (expr[i] == "*" ||  expr[i] == "/" || expr[i] == "+" || expr[i] == "-")) && !error_stacker["incorrectStartEnd"]){
+            error_stacker["incorrectStartEnd"] = {reason:"cannot start or end with multiplication or a division sign",error_type:"INCORRECT_STARTING_CHAR"};
         }
+        //decimal checking
+        if((i > 0  && (expr[i] == "*" && isNaN(Number(expr[i-1])) || (expr[i] == "/" && isNaN(Number(expr[i-1]))))) && !error_stacker["repeatedMultiplicationDivison"]){
+            error_stacker["repeatedMultiplicationDivison"] = error_stacker["incorrectCharacter"] =  {reason:"invalid synthax cannot process multiplication and division syntax should look like {valid_expression} {*,/} {valid_expression}", error_type:"REPEATED_MULT/DIV"};
+        }
+
+        //checking the validity of cos, sin, tan and ln 
+        if(i < expr.length -1 && ((expr[i] == "a" && (expr[i+1] != "c" && expr[i+1] != "s" && expr[i+1] != "t"))) && !error_stacker["custom_function_validity"]){
+            error_stacker["custom_function_validity"] = {reason:"arc or a should is only availble after a trigonometric function" , error_type:"INVALID_CUSTOM_FUNCTION"};
+        }
+        if(i < expr.length -1 && ((expr[i] == "c" && expr[i+1] != "(") || (expr[i] == "s" && expr[i+1] != "(") || (expr[i] == "t" && expr[i+1] != "(") || (expr[i] == "l" && expr[i+1] != "(")) && !error_stacker["custom_function_validity"]){
+            error_stacker["custom_function_validity"] = {reason:"every custom function should clearly start with a () for example sin(express)" , error_type:"INVALID_CUSTOM_FUNCTION"};
+        }
+        
+        //parenthesis checking
         if(expr[i] == "("){
             opened += 1;
         }
@@ -35,15 +60,11 @@ const checkExpressionValidity:(expr: string) => invalid_output = (expr:string) =
             opened -= 1;
         }
     }
+    // checking for invalid parenthesis
     if(opened != 0){
-        return {reason:"parenthesis are invalid", validity:false};
+        error_stacker["invalidParenthesis"] =  {reason:"parenthesis are invalid", error_type:"INVALID_PARENTHESIS"};
     }
-
-    //
-
-    //
-
-    return {reason:"",validity:true};
+    return {reason:"",validity:Object.keys(error_stacker).length == 0, error_stack:error_stacker};
 } 
 
 const recursiveExpresssionEvaluator: (expr: string)=> number  = (expr:string) =>{
@@ -62,9 +83,21 @@ const recursiveExpresssionEvaluator: (expr: string)=> number  = (expr:string) =>
     return 1;
 }
 
+
 const ExperssionEvaluatorController: (req:Request,res:Response)=> void = async (req:Request,res:Response)=>{
     const { expression, type }: { expression: string[]; type: string } = req.body;
-    
+    let expression_error_stacker:{ [key: string]: Error_stacker } = {};
+    if(type == "parametric_equations"){
+
+    }else if(type == "function"){
+
+    }else if(type == "cylinder"){
+
+    }else if(type == "elipsoids"){
+
+    }else{
+        res.status(210).json("error");
+    }
     res.json({"hello":true});
 }
 
