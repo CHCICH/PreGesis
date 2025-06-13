@@ -8,7 +8,6 @@ interface operation_stacker_object{
 }
 
 interface invalid_output{
-    reason:string;
     validity:boolean;
     error_stack:{ [key: string]: Error_stacker };
 }
@@ -84,21 +83,74 @@ const checkExpressionValidity:(expr: string) => invalid_output = (expr:string) =
     if(opened != closed){
         error_stacker["invalidParenthesis"] =  {reason:"parenthesis are invalid", error_type:"INVALID_PARENTHESIS"};
     }
-    return {reason:"",validity:Object.keys(error_stacker).length == 0, error_stack:error_stacker};
+    return {validity:Object.keys(error_stacker).length == 0, error_stack:error_stacker};
 } 
+
+const ExpressionFineTuner: (expression:string, variable:string[]) => string = (expression:string, variable:string[]) => {
+    variable.map( variable_d =>{
+        // lastley we need to check for something that looks like 2t + 1 this could cause errors because the interpreter dosen't know what 2t is so we
+        // need to make it 2*(t) the (t) is already done now we need to take care of the (expression) * t
+        let location_t_expression_array: Array<number> = [];
+        for(let i:number = 1 ; i < expression.length ; i++){
+            if(expression[i] == variable_d && /[0-9).]/.test(expression[i-1])){
+                location_t_expression_array.push(i);
+            }
+        }
+        for(let i:number = 0 ; i < location_t_expression_array.length; i++){
+            expression = expression.slice(0, location_t_expression_array[i]+i) + "*" + expression.slice(location_t_expression_array[i]+i);
+        }
+        if(variable.find(item => item == "t")){
+            expression = expression.replace(/tan/g,"w").replace(/t/g, "(t)").replace(/w/g, "tan");
+        }else{
+            expression = expression.replace(`${variable_d}`, `(${variable_d})`);
+        }
+    });
+    const change_mapping:Array<{[key:string]:string }> = [
+        {"tan":"Math.tan"},
+        {"sin":"Math.sin"},
+        {"cos":"Math.cos"},
+        {"ln":"Math.log"},
+        {"e":"Math.E"},
+        {"^":"**"}
+    ];
+    // change_mapping.map( variable_d =>{
+    //     expression = expression.replace(variable_d.keys[0],variable_d[variable_d.keys[0]]);
+    // });
+    return expression;
+}
+
 
 const ExperssionEvaluatorController: (req:Request,res:Response)=> void = async (req:Request,res:Response)=>{
     let g:string = 'a';
     try{
-        const { expression, type }: { expression: string[]; type: string } = req.body;
-        let checkValidity :invalid_output = checkExpressionValidity(expression[0]);
+        const { expression, type,variables}: { expression: string[]; type: string; variables:string[] } = req.body;
+        let new_expression = expression;
+        // error checking
+        let error_stacker: Array<invalid_output> = [];
+        expression.map(item=>{
+            let temp_item:string = "";
+            if(type === "parametric_equations"){
+                temp_item = item.replace(/tan/g,"w").replace(/t/g, "1").replace(/w/g, "tan");
+            }else if(type === "function" ){
 
-        testExpressions.map(item=>{
-            console.log(item,checkExpressionValidity(item).validity)
-        })
-        let expression_error_stacker:{ [key: string]: Error_stacker } = {};
-        if(type == "parametric_equations"){
+            }else if(type == "cylinder"){
     
+            }else if(type == "elipsoids"){
+            
+            }else{
+            }  
+            let isvalid:invalid_output = checkExpressionValidity(temp_item);
+            if(!(isvalid.validity)){
+                error_stacker.push(isvalid);
+            }
+        });
+        if(error_stacker.length !== 0 ){
+            res.status(210).json(error_stacker);
+        }
+        // end of error checking
+        new_expression = expression.map(item=>item = ExpressionFineTuner(item,variables));
+        if(type == "parametric_equations"){ 
+
         }else if(type == "function"){
     
         }else if(type == "cylinder"){
@@ -107,11 +159,10 @@ const ExperssionEvaluatorController: (req:Request,res:Response)=> void = async (
             
         }else{
             res.status(210).json("errors");
-        }    
-        
-        res.json(checkValidity);
+        }   
+        res.json(new_expression);
     }catch(error){
-        console.log("error happened");
+        console.log(error);
         res.status(400).json({"error":true});
     }    
 }    
@@ -120,3 +171,41 @@ const ExperssionEvaluatorController: (req:Request,res:Response)=> void = async (
 
 export {ExperssionEvaluatorController };
 
+
+// this is here the function template that generates the whole 3d surface and therefore we need to feed it the equation 
+// that the user will give it this only works for the z=f(x,y) we need to create a similar for parametric curves and equation
+/*
+const generateSurfaceData2 = () => {
+  const x2 = [];
+  const y2 = [];
+  const z2 = [];
+
+  // Define ranges for x and y
+  const range = 5; // -5 to 5
+  const numPoints = 50;
+  const step = (range * 2) / (numPoints - 1);
+
+  // Populate x and y arrays
+  for (let i = 0; i < numPoints; i++) {
+    x2.push(-range + i * step);
+    y2.push(-range + i * step);
+  }
+
+  // Calculate z values based on the function: z = sin(sqrt(x^2 + y^2))
+  for (let i = 0; i < numPoints; i++) {
+    const row = [];
+    for (let j = 0; j < numPoints; j++) {
+      const valX = x2[j]; // x for current column
+      const valY = y2[i]; // y for current row
+      const r = -valX*valX-valY*valY+10;
+      row.push(r);
+    }
+    z2.push(row);
+  }
+
+  return { x2, y2, z2 };
+};
+
+
+
+*/
