@@ -12,10 +12,10 @@ app.use(express.json());
 
 app.use('/expression_eval',ExpressionEvaluator);
 
-app.get("/test",async (req:Request,res:Response)=>{
-    res.send("Main Route System");
-})
+// app.get("/test",async (req:Request,res:Response)=>{
+//     res.send("Main Route System");
+// })
 
-app.listen(PORT, async ()=>{
+app.listen(PORT,async ()=>{
     console.log(`listening to port ${PORT}`);
-})
+});
