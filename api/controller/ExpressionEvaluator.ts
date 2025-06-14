@@ -146,21 +146,23 @@ const ExperssionEvaluatorController: (req:Request,res:Response)=> void = async (
         });
         if(error_stacker.length !== 0 ){
             res.status(210).json(error_stacker);
-        }
-        // end of error checking
-        new_expression = expression.map(item=>item = ExpressionFineTuner(item,variables));
-        if(type == "parametric_equations"){ 
-
-        }else if(type == "function"){
-    
-        }else if(type == "cylinder"){
-    
-        }else if(type == "elipsoids"){
-            
+            // end of error checking
         }else{
-            res.status(210).json("errors");
-        }   
-        res.json(new_expression);
+
+            new_expression = expression.map(item=>item = ExpressionFineTuner(item,variables));
+            if(type == "parametric_equations"){ 
+    
+            }else if(type == "function"){
+        
+            }else if(type == "cylinder"){
+        
+            }else if(type == "elipsoids"){
+                
+            }else{
+                res.status(210).json("errors");
+            }   
+            res.json(new_expression);
+        }
     }catch(error){
         console.log(error);
         res.status(400).json({"error":true});
@@ -168,6 +170,7 @@ const ExperssionEvaluatorController: (req:Request,res:Response)=> void = async (
 }    
 
  
+
 
 export {ExperssionEvaluatorController };
 
