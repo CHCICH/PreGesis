@@ -170,14 +170,20 @@ const ExperssionEvaluatorController: (req:Request,res:Response)=> void = async (
         }
     }catch(error){
         console.log(error);
-        res.status(400).json({"error":true});
+        res.status(400).json(new Response_Error(404,[{
+            validity:false,
+            error_stack:{
+                "COMPILATION ERROR":
+                {
+                error_type:"COMPILATION ERROR",
+                reason: JSON.stringify(error)
+            }
+        } 
+        }]));
     }    
 }    
 
  
-
-
-export {ExperssionEvaluatorController };
 
 
 // this is here the function template that generates the whole 3d surface and therefore we need to feed it the equation 
@@ -217,3 +223,6 @@ const generateSurfaceData2 = () => {
 
 
 */
+ 
+export {ExperssionEvaluatorController };
+
