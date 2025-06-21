@@ -183,8 +183,6 @@ const ExperssionEvaluatorController: (req:Request,res:Response)=> void = async (
     }    
 }    
 
- 
-
 
 // this is here the function template that generates the whole 3d surface and therefore we need to feed it the equation 
 // that the user will give it this only works for the z=f(x,y) we need to create a similar for parametric curves and equation
