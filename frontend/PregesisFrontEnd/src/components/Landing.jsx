@@ -12,8 +12,8 @@ const Landing = ({color_mode,screenSize}) => {
     return (
         <>
         <Header color_mode={color_mode} screenSize={screenSize}></Header>
-        {/* <LandingBody color_mode={color_mode} screenSize={screenSize}></LandingBody> */}
-        <Dashboard color_mode={color_mode} screenSize={screenSize} ></Dashboard>
+        <LandingBody color_mode={color_mode} screenSize={screenSize}></LandingBody>
+        {/* <Dashboard color_mode={color_mode} screenSize={screenSize} ></Dashboard> */}
         <Footer color_mode={color_mode} ></Footer>
         </>
     )
