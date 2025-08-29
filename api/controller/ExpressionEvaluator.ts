@@ -1,5 +1,6 @@
 import { Request,Response } from "express";
 import { testExpressions } from "../tests/expression";
+import {Response_Error,Response_type,response_Error} from "../errors/Error"
 
 
 interface operation_stacker_object{
@@ -23,6 +24,7 @@ interface function_hub{
 }
 
 const checkExpressionValidity:(expr: string) => invalid_output = (expr:string) =>{
+    console.log(expr)
     expr = expr.replace(/\s/g, '');
     expr = expr.replace(/cos/g, 'c').replace(/sin/g, 's').replace(/tan/g, 't').replace(/arc/g, 'a').replace(/ln/g, 'l').replace(/pi/g,'p');
     const invalidCharRegex = /[^0-9lsctape*\/^().+\-]/;
@@ -56,7 +58,7 @@ const checkExpressionValidity:(expr: string) => invalid_output = (expr:string) =
             error_stacker["custom_function_validity"] = {reason:"every custom function should clearly start with a () for example sin(express)" , error_type:"INVALID_CUSTOM_FUNCTION"};
         }
         //parenthesis opening and closing checking
-        if(i >0 && (expr[i] == ")" && !/[0-9e.]/.test(expr[i-1])) && !error_stacker["invalidParenthesis"]){
+        if(i >0 && (expr[i] == ")" && !/[0-9e.)]/.test(expr[i-1])) && !error_stacker["invalidParenthesis"]){
             error_stacker["invalidParenthesis"] = {reason:"invalid synthax cannot process and invalid character before an )" , error_type:"INVALID_PARENTHESIS"};
         }
         // additon substarction
@@ -127,12 +129,12 @@ const ExpressionFineTuner: (expression:string, variable:string[]) => string = (e
         {"cos":"Math.cos"},
         {"ln":"Math.log"},
         {"e":"Math.E"},
-        // {"^":"**"}
     ];
     change_mapping.map( variable_d =>{
-        expression = expression.replace(new RegExp(Object.keys(variable_d)[0],'g'),variable_d[Object.keys(variable_d)[0]]);
+        expression = expression.replace(new RegExp(Object.keys(variable_d)[0],"g"),variable_d[Object.keys(variable_d)[0]]);
     });
     expression = expression.replace(/\^/g, "**");
+
     return expression;
 }
 
@@ -160,8 +162,10 @@ const ExperssionEvaluatorController: (req:Request,res:Response)=> void = async (
                 error_stacker.push(isvalid);
             }
         });
+
+
         if(error_stacker.length !== 0 ){
-            res.status(210).json(error_stacker);
+            res.status(210).json(new Response_Error(400,error_stacker));
             // end of error checking
         }else{
 
@@ -181,14 +185,18 @@ const ExperssionEvaluatorController: (req:Request,res:Response)=> void = async (
         }
     }catch(error){
         console.log(error);
-        res.status(400).json({"error":true});
+        res.status(400).json(new Response_Error(404,[{
+            validity:false,
+            error_stack:{
+                "COMPILATION ERROR":
+                {
+                error_type:"COMPILATION ERROR",
+                reason: JSON.stringify(error)
+            }
+        } 
+        }]));
     }    
 }    
-
- 
-
-
-export {ExperssionEvaluatorController };
 
 
 // this is here the function template that generates the whole 3d surface and therefore we need to feed it the equation 
@@ -228,3 +236,6 @@ const generateSurfaceData2 = () => {
 
 
 */
+ 
+export {ExperssionEvaluatorController };
+
