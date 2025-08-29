@@ -64,7 +64,7 @@ const checkExpressionValidity:(expr: string) => invalid_output = (expr:string) =
             error_stacker["invalidAdditionSubstraction"] = {reason:"invalid synthax cannot process and invalid character before an +/-" , error_type:"INVALID_ADDITION_SUBSTRACTION"};
         }
         if(i < expr.length - 1 && (expr[i] == ")" && /[0-9]/.test(expr[i+1])) || (i > 0 && (expr[i] == "(" && /[0-9]/.test(expr[i-1]))) ){
-            error_stacker["invalidUseOfParenthesis"] = {reason:"you cannot do 1(1) or (1)tan(x) you need to use the * for the product its not like 2x and 3tan(x)", error_type:"INVALID_PARENTHSIS_USE"};
+            error_stacker["invalidUseOfParenthesis"] = {reason:"you cannot do 1(1) or (1)tan(x) you need to use the * for the product its not like 2x and 3tan(x)", error_type:"INVALID_PARENTHESIS_USE"};
         }
         //
         if(opened < closed){
