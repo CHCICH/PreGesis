@@ -18,6 +18,11 @@ interface Error_stacker{
     reason:string;
 }
 
+interface function_hub{
+    dominant_variable:string,
+    independent_variable:Array<string>
+}
+
 const checkExpressionValidity:(expr: string) => invalid_output = (expr:string) =>{
     console.log(expr)
     expr = expr.replace(/\s/g, '');
@@ -60,13 +65,15 @@ const checkExpressionValidity:(expr: string) => invalid_output = (expr:string) =
         if(i < expr.length -1 && ((expr[i] == "+" && !/[0-9cstale(+-]/.test(expr[i+1])) || (expr[i] == "-" && !/[0-9cstale(+-]/.test(expr[i+1])) ) && !error_stacker["invalidAdditionSubstraction"]){
             error_stacker["invalidAdditionSubstraction"] = {reason:"invalid synthax cannot process and invalid character before an +/-" , error_type:"INVALID_ADDITION_SUBSTRACTION"};
         }
+        if(i < expr.length - 1 && (expr[i] == ")" && /[0-9]/.test(expr[i+1])) || (i > 0 && (expr[i] == "(" && /[0-9]/.test(expr[i-1]))) ){
+            error_stacker["invalidUseOfParenthesis"] = {reason:"you cannot do 1(1) or (1)tan(x) you need to use the * for the product its not like 2x and 3tan(x)", error_type:"INVALID_PARENTHESIS_USE"};
+        }
         //
         if(opened < closed){
             error_stacker["invalidParenthesis"] =  {reason:"parenthesis are invalid", error_type:"INVALID_PARENTHESIS"};
         }
         //parenthesis checking 
         if(expr[i] == "("){
-
             opened += 1;
         }
         else if(expr[i] == ")"){
@@ -104,9 +111,18 @@ const ExpressionFineTuner: (expression:string, variable:string[]) => string = (e
         if(variable.find(item => item == "t")){
             expression = expression.replace(/tan/g,"w").replace(/t/g, "(t)").replace(/w/g, "tan");
         }else{
-            expression = expression.replace(`${variable_d}`, `(${variable_d})`);
+            expression = expression.replace(new RegExp(`${variable_d}`,'g'), `(${variable_d})`);
         }
     });
+    let locator_arr :Array<number> = [];
+    for(let i:number = 1; i < expression.length; ++i){
+        if(expression[i] == "(" && expression[i - 1] == ")"){
+            locator_arr.push(i);
+        }
+    }
+    for(let i:number = 0; i < locator_arr.length; ++i){
+       expression = expression.slice(0, locator_arr[i]+i) + "*" + expression.slice(locator_arr[i]+i); 
+    }
     const change_mapping:Array<{[key:string]:string }> = [
         {"tan":"Math.tan"},
         {"sin":"Math.sin"},
@@ -115,18 +131,17 @@ const ExpressionFineTuner: (expression:string, variable:string[]) => string = (e
         {"e":"Math.E"},
     ];
     change_mapping.map( variable_d =>{
-
         expression = expression.replace(new RegExp(Object.keys(variable_d)[0],"g"),variable_d[Object.keys(variable_d)[0]]);
     });
-    expression = expression.replace(/\^/g,"**");
+    expression = expression.replace(/\^/g, "**");
+
     return expression;
 }
 
 
 const ExperssionEvaluatorController: (req:Request,res:Response)=> void = async (req:Request,res:Response)=>{
-    let g:string = 'a';
     try{
-        const { expression, type,variables}: { expression: string[]; type: string; variables:string[] } = req.body;
+        const { expression, type,variables}: { expression: string[]; type: string; variables: function_hub, } = req.body;
         let new_expression = expression;
         // error checking
         let error_stacker: Array<invalid_output> = [];
@@ -135,11 +150,11 @@ const ExperssionEvaluatorController: (req:Request,res:Response)=> void = async (
             if(type === "parametric_equations"){
                 temp_item = item.replace(/tan/g,"w").replace(/t/g, "1").replace(/w/g, "tan");
             }else if(type === "function" ){
-                temp_item = item.replace("x","1").replace("y","1").replace("z","1");
-            }else if(type == "cylinder"){
-                temp_item = item.replace("x","1").replace("y","1").replace("z","1");
-            }else if(type == "elipsoids"){
-                temp_item = item.replace("x","1").replace("y","1").replace("z","1");
+                temp_item = item.replace(/x/g, /x/.test(item) && variables.independent_variable.includes("x") ? "1" : "x").replace(/y/g, /y/.test(item) && variables.independent_variable.includes("y") ? "2": "y").replace(/z/g,/z/.test("z") && variables.independent_variable.includes("z") ? "3" : "z");
+            }else if(type === "cylinder"){
+
+            }else if(type === "elipsoids"){
+
             }else{
             }  
             let isvalid:invalid_output = checkExpressionValidity(temp_item);
@@ -154,9 +169,9 @@ const ExperssionEvaluatorController: (req:Request,res:Response)=> void = async (
             // end of error checking
         }else{
 
-            new_expression = expression.map(item=>item = ExpressionFineTuner(item,variables));
+            new_expression = expression.map(item=>item = ExpressionFineTuner(item,variables.independent_variable));
             if(type == "parametric_equations"){ 
-    
+                
             }else if(type == "function"){
         
             }else if(type == "cylinder"){
