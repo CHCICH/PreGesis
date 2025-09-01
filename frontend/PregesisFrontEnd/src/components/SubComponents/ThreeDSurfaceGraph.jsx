@@ -66,6 +66,8 @@ const generateSurfaceData2 = () => {
   return { x2, y2, z2 };
 };
 
+
+
 function ThreeDSurfaceGraph() {
   const { x, y, z } = generateSurfaceData();
   const { x2, y2, z2 } = generateSurfaceData2();
