@@ -1,6 +1,7 @@
 import { Request,Response } from "express";
 import { testExpressions } from "../tests/expression";
 import {Response_Error,Response_type,response_Error} from "../errors/Error"
+import { StringMappedInteractionTypes } from "discord.js";
 
 
 interface operation_stacker_object{
@@ -21,6 +22,25 @@ interface Error_stacker{
 interface function_hub{
     dominant_variable:string,
     independent_variable:Array<string>
+}
+
+interface dimensions{
+    x:number,
+    y:number,
+    z:number,
+}
+
+class Expression_response {
+    x:any;
+    y:any;
+    z:any;
+    finalized_equation: string;
+    constructor(x: any, y: any, z: any, finalized_equation: string) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.finalized_equation = finalized_equation;
+    }
 }
 
 const checkExpressionValidity:(expr: string) => invalid_output = (expr:string) =>{
@@ -48,7 +68,7 @@ const checkExpressionValidity:(expr: string) => invalid_output = (expr:string) =
         }
         //decimal checking
         if((i > 0  && (expr[i] == "." && isNaN(Number(expr[i-1])) )) && !error_stacker["decimalInvalidity"]){
-            error_stacker["decimalInvalidity"]  =  {reason:"invalid synthax cannot process this decimal number", error_type:"DECIMAL_NUMBER"};
+            error_stacker["decimalInvalidity"]  =  {reason:"invalid synthax cannot process this decimal number", error_type:"DECIMAL_number"};
         }
         //checking the validity of cos, sin, tan and ln 
         if(i < expr.length -1 && ((expr[i] == "a" && (expr[i+1] != "c" && expr[i+1] != "s" && expr[i+1] != "t"))) && !error_stacker["custom_function_validity"]){
@@ -139,9 +159,92 @@ const ExpressionFineTuner: (expression:string, variable:string[]) => string = (e
 }
 
 
+
+// this is the evaluator function for function in the form of f(w1,w2) = w3 where wi is a variable from the set {x,y,z};
+
+const generateFunctionData = (expression:string, dominant_variable:string, range_X:number , range_Y:number, range_Z:number) => {
+    const x2 = [];
+    const y2 = [];
+    const z2 = [];
+    const numPoints = 80;
+    if(dominant_variable === "z"){
+        const step_X = (range_X * 2) / (numPoints - 1);
+        const step_Y = (range_Y * 2) / (numPoints - 1);
+
+
+        // Populate x
+        for (let i = 0; i < numPoints; i++) {
+            x2.push(-range_X + i * step_X);
+        }
+        // populate y
+        for(let i = 0; i < numPoints; i++){
+            y2.push(-range_Y + i * step_Y);
+        }
+        for (let i = 0; i < numPoints; i++) {
+            const row = [];
+            for (let j = 0; j < numPoints; j++) {
+                const x = x2[j]; // x for current column
+                const y = y2[i]; // y for current row
+                const r = eval(expression);
+                row.push(r);
+            }
+            z2.push(row);
+        }
+    }else if(dominant_variable === "y"){
+        const step_X = (range_X * 2) / (numPoints - 1);
+        const step_Z = (range_Z * 2) / (numPoints - 1);
+
+
+        // Populate x
+        for (let i = 0; i < numPoints; i++) {
+            x2.push(-range_X + i * step_X);
+        }
+        // populate y
+        for(let i = 0; i < numPoints; i++){
+            z2.push(-range_Z + i * step_Z);
+        }
+        for (let i = 0; i < numPoints; i++) {
+            const row = [];
+            for (let j = 0; j < numPoints; j++) {
+                const x = x2[j]; // x for current column
+                const z = z2[i]; // y for current row
+                const r = eval(expression);
+                row.push(r);
+            }
+            y2.push(row);
+        }
+    }else if(dominant_variable == "x"){
+        const step_Y = (range_Y * 2) / (numPoints - 1);
+        const step_Z = (range_Z * 2) / (numPoints - 1);
+
+
+        // Populate x
+        for (let i = 0; i < numPoints; i++) {
+            y2.push(-range_Y + i * step_Y);
+        }
+        // populate y
+        for(let i = 0; i < numPoints; i++){
+            z2.push(-range_Z + i * step_Z);
+        }
+        for (let i = 0; i < numPoints; i++) {
+            const row = [];
+            for (let j = 0; j < numPoints; j++) {
+                const y = y2[j]; // x for current column
+                const z = z2[i]; // y for current row
+                const r = eval(expression);
+                row.push(r);
+            }
+            x2.push(row);
+        }
+    }
+
+    return {x2,y2,z2}
+
+};
+
 const ExperssionEvaluatorController: (req:Request,res:Response)=> void = async (req:Request,res:Response)=>{
     try{
-        const { expression, type,variables}: { expression: string[]; type: string; variables: function_hub, } = req.body;
+        const { dimension,expression, type,variables}: { dimension:dimensions, expression: string[]; type: string; variables: function_hub, } = req.body;
         let new_expression = expression;
         // error checking
         let error_stacker: Array<invalid_output> = [];
@@ -180,8 +283,13 @@ const ExperssionEvaluatorController: (req:Request,res:Response)=> void = async (
                 
             }else{
                 res.status(210).json("errors");
-            }   
-            res.json(new_expression);
+            }
+            const final_response:Array<Expression_response> = [];
+            new_expression.map(single_response=>{
+                const { x2, y2, z2} = generateFunctionData(single_response,variables.dominant_variable,dimension.x,dimension.y,dimension.z);
+                final_response.push(new Expression_response(x2,y2,z2,single_response));
+            })
+            res.status(200).json(final_response);
         }
     }catch(error){
         console.log(error);
@@ -199,6 +307,8 @@ const ExperssionEvaluatorController: (req:Request,res:Response)=> void = async (
 }    
 
 
+
+
 // this is here the function template that generates the whole 3d surface and therefore we need to feed it the equation 
 // that the user will give it this only works for the z=f(x,y) we need to create a similar for parametric curves and equation
 /*
@@ -206,7 +316,6 @@ const generateSurfaceData2 = () => {
   const x2 = [];
   const y2 = [];
   const z2 = [];
-
   // Define ranges for x and y
   const range = 5; // -5 to 5
   const numPoints = 50;
